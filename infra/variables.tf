@@ -1,9 +1,16 @@
-variable "project" {}
+variable "project" {
+  description = "GCPプロジェクトID"
+  type        = string
+}
 
 variable "region" {
-  default = "asia-northeast1"
+  description = "GCPリージョン"
+  type        = string
+  default     = "asia-northeast1"
 }
 
 variable "zone" {
-  default = "asia-northeast1-c"
+  description = "GCPゾーン"
+  type        = string
+  default     = "asia-northeast1-c"
 }
