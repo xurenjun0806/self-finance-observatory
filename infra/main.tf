@@ -20,7 +20,7 @@ module "bq" {
 module "service_account" {
   source = "./modules/service_account"
 
-  account_id             = "dbt_run_job_service_account"
+  account_id             = "dbt-run-job-sa"
   display_name           = "dbt Run Job Service Account"
   project                = var.project
   project_roles          = ["roles/bigquery.jobUser", "roles/artifactregistry.reader"]
