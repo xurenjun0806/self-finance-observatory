@@ -7,3 +7,25 @@ module "gcs" {
   bucket_name = var.bucket_name
 }
 
+# BigQuery作成
+module "bq" {
+  source = "./modules/bq"
+
+  project  = var.project
+  location = var.region
+  dataset_ids = ["raw", "cleaned", "mart"]
+}
+
+# サービスアカウント作成
+module "service_account" {
+  source = "./modules/service_account"
+
+  account_id            = "dbt_run_job_service_account"
+  display_name          = "dbt Run Job Service Account"
+  project               = var.project
+  project_roles         = ["roles/bigquery.jobUser"]
+  bigquery_dataset_ids  = ["raw", "cleaned", "mart"]
+  bigquery_dataset_roles = ["roles/bigquery.dataEditor"]
+  storage_bucket_name   = var.bucket_name
+  storage_bucket_roles  = ["roles/storage.objectViewer"]
+}
