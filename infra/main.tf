@@ -24,8 +24,8 @@ module "service_account" {
   display_name           = "dbt Run Job Service Account"
   project                = var.project
   project_roles          = ["roles/bigquery.jobUser", "roles/artifactregistry.reader"]
-  bigquery_dataset_ids   = ["raw", "cleaned", "mart"]
+  bigquery_dataset_ids   = module.bq.bq_dataset_ids
   bigquery_dataset_roles = ["roles/bigquery.dataEditor"]
-  storage_bucket_name    = var.bucket_name
+  storage_bucket_name    = module.gcs.bucket_name
   storage_bucket_roles   = ["roles/storage.objectViewer"]
 }
