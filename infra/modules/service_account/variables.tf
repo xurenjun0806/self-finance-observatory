@@ -15,7 +15,30 @@ variable "display_name" {
 }
 
 variable "project_roles" {
-  description = "付与するロールのリスト"
+  description = "付与するプロジェクト内のロールのリスト"
+  type        = list(string)
+  default     = []
+}
+
+variable "bigquery_dataset_ids" {
+  description = "BigQueryデータセットIDのリスト"
+  type        = list(string)
+  default     = []
+}
+
+variable "bigquery_dataset_roles" {
+  description = "付与するBigQueryデータセット内のロールのリスト"
+  type        = list(string)
+  default     = []
+}
+
+variable "storage_bucket_name" {
+  description = "GCSバケットの名前"
+  type        = string
+}
+
+variable "storage_bucket_roles" {
+  description = "付与するストレージバケット内のロールのリスト"
   type        = list(string)
   default     = []
 }
