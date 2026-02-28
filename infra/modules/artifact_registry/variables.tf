@@ -3,7 +3,7 @@ variable "project" {
   type        = string
 }
 
-variable "localtion" {
+variable "location" {
   description = "Artifact Registryのロケーション"
   type        = string
 }
