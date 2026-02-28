@@ -6,6 +6,12 @@ resource "google_cloud_run_v2_job" "this" {
     template {
       containers {
         image = var.run_job_image
+        resources {
+          limits = {
+            cpu    = "1"
+            memory = "512Mi"
+          }
+        }
       }
       service_account = var.service_account_email
     }

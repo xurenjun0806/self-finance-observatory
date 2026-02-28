@@ -35,6 +35,7 @@ variable "bigquery_dataset_roles" {
 variable "storage_bucket_name" {
   description = "GCSバケットの名前"
   type        = string
+  default     = ""
 }
 
 variable "storage_bucket_roles" {

@@ -12,6 +12,5 @@ variable "location" {
 variable "dataset_ids" {
   description = "BigQueryデータセットIDのリスト"
   type        = list(string)
-  default     = ["raw", "cleaned", "mart"]
 }
 

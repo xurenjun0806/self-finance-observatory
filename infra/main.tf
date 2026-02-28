@@ -29,3 +29,21 @@ module "service_account" {
   storage_bucket_name    = module.gcs.bucket_name
   storage_bucket_roles   = ["roles/storage.objectViewer"]
 }
+
+# Artifact Registry作成
+module "artifact_registry" {
+  source = "./modules/artifact_registry"
+  project = var.project
+  location = var.region
+  repository_id = "dbt-run-job-repo"
+}
+
+# Cloud Run Job作成
+module "run_job" {
+  source = "./modules/run_job"
+  project = var.project
+  job_name              = "dbt-run-job"
+  location              = var.region
+  run_job_image         = "${module.artifact_registry.repository_image_url}/dbt-run-job:latest"
+  service_account_email = module.service_account.email
+}

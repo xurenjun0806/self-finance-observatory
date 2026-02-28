@@ -3,7 +3,8 @@ resource "google_storage_bucket" "this" {
   location = var.region
   name     = var.bucket_name
 
-  public_access_prevention = "enforced"
+  public_access_prevention    = "enforced"
+  uniform_bucket_level_access = true
 
   #   lifecycle {
   #     prevent_destroy = true
