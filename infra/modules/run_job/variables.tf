@@ -23,3 +23,8 @@ variable "run_job_image" {
   description = "Cloud Run Jobで使用するコンテナイメージのURL"
   type        = string
 }
+
+variable "gcs_bucket_url" {
+  description = "dbtの外部テーブルが参照するGCSバケットURL（例: gs://bucket-name）"
+  type        = string
+}

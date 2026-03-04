@@ -53,4 +53,5 @@ module "run_job" {
   location              = var.region
   run_job_image         = "${module.artifact_registry.repository_image_url}/dbt-run-job:latest"
   service_account_email = module.service_account.email
+  gcs_bucket_url        = module.gcs.bucket_url
 }
