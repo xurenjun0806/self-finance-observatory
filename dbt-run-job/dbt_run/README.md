@@ -1,15 +1,61 @@
-Welcome to your new dbt project!
+# dbt_run
 
-### Using the starter project
+self-finance-observatoryのdbtプロジェクトです。
 
-Try running the following commands:
-- dbt run
-- dbt test
+## 環境変数
 
+| 変数名 | 説明 | 例 |
+|---|---|---|
+| `GCS_BUCKET_URL` | 外部テーブルが参照するGCSバケットURL | `gs://your-bucket-name` |
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+## ローカル開発での設定方法
+
+### 1. `.env` ファイルを作成
+
+```bash
+cp .env.example .env
+```
+
+`.env` を編集してバケットURLを設定します。
+
+```
+GCS_BUCKET_URL=gs://your-bucket-name
+```
+
+### 2. 環境変数を読み込む
+
+```bash
+source .env
+```
+
+または、毎回自動で読み込みたい場合は `direnv` を使います。
+
+```bash
+# .envrc を作成
+echo "dotenv" > .envrc
+
+# direnv に許可を与える（初回のみ）
+direnv allow
+```
+
+以降はディレクトリに入るだけで自動的に環境変数が読み込まれます。
+
+## 外部テーブルの作成・更新
+
+外部テーブルの定義は `models/sources/` 以下のYAMLファイルで管理しています。
+定義を変更した場合は以下のコマンドで反映します。
+
+```bash
+# 初回 or 強制再作成
+dbt run-operation stage_external_sources --vars 'ext_full_refresh: true'
+
+# 通常の更新
+dbt run-operation stage_external_sources
+```
+
+## 通常の実行
+
+```bash
+dbt run
+dbt test
+```

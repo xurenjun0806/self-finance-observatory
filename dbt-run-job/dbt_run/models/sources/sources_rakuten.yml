@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: gcs_raw_rakuten
+    schema: raw
+
+    tables:
+      - name: gcs_raw_rakuten
+        external:
+          location: "{{ env_var('GCS_BUCKET_URL') }}/raw/rakuten/*.csv"
+          file_format: csv
+          options:
+            skip_leading_rows: 1
+            field_delimiter: ","
+            quote: '"'
+            encoding: UTF-8
+
+        columns:
+          - name: used_at
+            data_type: STRING
+            description: "利用日"
+          - name: store_name
+            data_type: STRING
+            description: "利用店名・商品名"
+          - name: card_holder
+            data_type: STRING
+            description: "利用者"
+          - name: payment_method
+            data_type: STRING
+            description: "支払方法"
+          - name: amount
+            data_type: STRING
+            description: "利用金額"
+          - name: fee
+            data_type: STRING
+            description: "手数料/利息"
+          - name: total_amount
+            data_type: STRING
+            description: "支払総額"
+          - name: current_month_payment
+            data_type: STRING
+            description: "当月支払金額"
+          - name: next_month_balance
+            data_type: STRING
+            description: "翌月繰越残高"
+          - name: is_new
+            data_type: STRING
+            description: "新規サイン"
