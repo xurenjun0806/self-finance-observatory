@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: rakuten_usage_details
-    description: "楽天カードeナビの確定済み月次明細（cleanedデータセット）"
+    description: "楽天カードの確定済み月次明細（cleanedデータセット）"
     columns:
       - name: payment_month
         data_type: date
