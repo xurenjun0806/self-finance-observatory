@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: rakuten_usage_details
+    description: "楽天カードeナビの確定済み月次明細（cleanedデータセット）"
+    columns:
+      - name: payment_month
+        data_type: date
+        description: "支払月（ファイル名から導出）"
+      - name: used_at
+        data_type: date
+        description: "利用日"
+      - name: store_name
+        data_type: string
+        description: "利用店名・商品名"
+      - name: card_holder
+        data_type: string
+        description: "利用者"
+      - name: payment_method
+        data_type: string
+        description: "支払方法（1回払い・分割払いなど）"
+      - name: amount
+        data_type: int64
+        description: "利用金額"
+      - name: fee
+        data_type: int64
+        description: "手数料/利息"
+      - name: total_amount
+        data_type: int64
+        description: "支払総額"
+      - name: current_month_payment
+        data_type: int64
+        description: "当月支払金額"
