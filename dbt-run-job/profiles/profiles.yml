@@ -1,0 +1,11 @@
+dbt_run:
+  target: prod
+  outputs:
+    prod:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('BIGQUERY_PROJECT') }}"
+      dataset: "{{ env_var('BIGQUERY_DATASET') }}"
+      location: asia-northeast1
+      threads: 4
+      timeout_seconds: 300
