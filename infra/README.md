@@ -51,14 +51,14 @@ terraform apply
 # 1. イメージをビルド（linux/amd64 を指定）
 cd dbt-run-job
 docker build --platform linux/amd64 \
-  -t asia-northeast1-docker.pkg.dev/self-finance-observatory/dbt-run-job-repo/dbt-run-job:latest \
+  -t asia-northeast1-docker.pkg.dev/<PROJECT_ID>/dbt-run-job-repo/dbt-run-job:latest \
   .
 
 # 2. Artifact Registry に認証（初回のみ）
 gcloud auth configure-docker asia-northeast1-docker.pkg.dev
 
 # 3. プッシュ
-docker push asia-northeast1-docker.pkg.dev/self-finance-observatory/dbt-run-job-repo/dbt-run-job:latest
+docker push asia-northeast1-docker.pkg.dev/<PROJECT_ID>/dbt-run-job-repo/dbt-run-job:latest
 
 # 4. Cloud Run Job を実行
 gcloud run jobs execute dbt-run-job --region asia-northeast1 --wait

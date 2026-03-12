@@ -33,14 +33,14 @@ cd dbt-run-job
 
 # ビルド
 docker build --platform linux/amd64 \
-  -t asia-northeast1-docker.pkg.dev/self-finance-observatory/dbt-run-job-repo/dbt-run-job:latest \
+  -t asia-northeast1-docker.pkg.dev/<PROJECT_ID>/dbt-run-job-repo/dbt-run-job:latest \
   .
 
 # Artifact Registry に認証（初回のみ）
 gcloud auth configure-docker asia-northeast1-docker.pkg.dev
 
 # プッシュ
-docker push asia-northeast1-docker.pkg.dev/self-finance-observatory/dbt-run-job-repo/dbt-run-job:latest
+docker push asia-northeast1-docker.pkg.dev/<PROJECT_ID>/dbt-run-job-repo/dbt-run-job:latest
 ```
 
 ## Cloud Run Job の実行
