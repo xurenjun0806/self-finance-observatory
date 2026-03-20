@@ -3,6 +3,7 @@ package com.example.finance_api.repository;
 import com.example.finance_api.model.Expense;
 import com.google.cloud.bigquery.BigQuery;
 import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.QueryParameterValue;
 import com.google.cloud.bigquery.TableResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -20,19 +21,20 @@ public class ExpenseRepository {
     private final BigQuery bigQuery;
 
     public List<Expense> findByYearAndMonth(Integer year, Integer month) {
-        String query = String.format(
+        String query =
             "SELECT " +
             "  used_at, " +
             "  store_name, " +
             "  current_month_payment " +
             "FROM `self-finance-observatory.cleaned.rakuten_usage_details` " +
-            "WHERE payment_month = DATE(%d, %d, 1) " +
+            "WHERE payment_month = DATE(@year, @month, 1) " +
             "  AND current_month_payment IS NOT NULL " +
-            "ORDER BY used_at",
-            year, month
-        );
+            "ORDER BY used_at";
 
-        QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(query).build();
+        QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(query)
+                .addNamedParameter("year", QueryParameterValue.int64(year))
+                .addNamedParameter("month", QueryParameterValue.int64(month))
+                .build();
 
         try {
             TableResult results = bigQuery.query(queryConfig);
