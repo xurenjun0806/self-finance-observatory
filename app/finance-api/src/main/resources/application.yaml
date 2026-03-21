@@ -3,4 +3,4 @@ spring:
     name: finance-api
 
 bigquery:
-  project-id: self-finance-observatory
+  project-id: ${BIGQUERY_PROJECT_ID}
