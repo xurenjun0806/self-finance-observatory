@@ -20,3 +20,8 @@ variable "bucket_name" {
   type        = string
   default     = "self-finance-observatory-data"
 }
+
+variable "auth_api_key" {
+  description = "API用の認証キー"
+  type        = string
+}

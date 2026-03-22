@@ -57,3 +57,28 @@ module "run_job" {
   bigquery_project      = var.project
   bigquery_dataset      = "cleaned"
 }
+
+# サービスアカウント作成
+module "cloud_run_service_account" {
+  source = "./modules/service_account"
+
+  account_id             = "finance-api-sa"
+  display_name           = "Finance API Service Account"
+  project                = var.project
+  project_roles          = ["roles/bigquery.user", "roles/artifactregistry.reader"]
+  bigquery_dataset_ids   = module.bq.bq_dataset_ids
+  bigquery_dataset_roles = ["roles/bigquery.dataViewer"]
+}
+
+# Cloud Run作成
+module "cloud_run" {
+  source = "./modules/cloud_run"
+
+  cloud_run_name        = "finance-api"
+  project               = var.project
+  location              = var.region
+  cloud_run_image       = "${module.artifact_registry.repository_image_url}/finance-api:latest"
+  service_account_email = module.cloud_run_service_account.email
+  bigquery_project      = var.project
+  auth_api_key          = var.auth_api_key
+}
