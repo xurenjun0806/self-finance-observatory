@@ -2,7 +2,7 @@
 FROM eclipse-temurin:25-jdk AS builder
 WORKDIR /app
 COPY . .
-RUN ./gradlew bootJar --no-daemon
+RUN chmod +x gradlew && ./gradlew bootJar --no-daemon
 
 # ランタイムステージ
 FROM eclipse-temurin:25-jre-alpine

@@ -32,5 +32,5 @@ variable "bigquery_project" {
 variable "auth_api_key" {
   description = "APIキー"
   type        = string
-  sensitive = true
+  sensitive   = true
 }

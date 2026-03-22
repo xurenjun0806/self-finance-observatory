@@ -1,13 +1,13 @@
 resource "google_cloud_run_service" "this" {
   name     = var.cloud_run_name
   location = var.location
-  project = var.project
+  project  = var.project
 
   template {
     metadata {
       annotations = {
-        "autoscaling.knative.dev/minScale": "0"
-        "autoscaling.knative.dev/maxScale": "1"
+        "autoscaling.knative.dev/minScale" : "0"
+        "autoscaling.knative.dev/maxScale" : "1"
       }
     }
     spec {
@@ -23,7 +23,7 @@ resource "google_cloud_run_service" "this" {
         }
         resources {
           limits = {
-            "cpu" = "1"
+            "cpu"    = "1"
             "memory" = "2Gi"
           }
         }
